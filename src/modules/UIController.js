@@ -13,7 +13,8 @@ export class UIController {
             statusTag: document.querySelector(selectors.statusTag),
             resetBtn: document.querySelector(selectors.resetBtn),
             copyAllBtn: document.querySelector('#copy-all-btn'),
-            exportCssBtn: document.querySelector('#export-css-btn')
+            exportCssBtn: document.querySelector('#export-css-btn'),
+            downloadMapBtn: document.querySelector('#download-map-btn')
         };
         
         this.currentPalette = [];
@@ -59,6 +60,10 @@ export class UIController {
         if (this.nodes.exportCssBtn) {
             this.nodes.exportCssBtn.onclick = () => this.exportCSS();
         }
+
+        if (this.nodes.downloadMapBtn) {
+            this.nodes.downloadMapBtn.onclick = () => this.exportSpectralMap();
+        }
     }
 
     onFileSelected(file) {
@@ -90,6 +95,7 @@ export class UIController {
         this.nodes.dropZone.classList.remove('hidden');
         this.nodes.copyAllBtn.classList.add('hidden');
         this.nodes.exportCssBtn.classList.add('hidden');
+        this.nodes.downloadMapBtn.classList.add('hidden');
         this.nodes.paletteContainer.innerHTML = `
             <div class="py-20 text-center border border-slate-800/50 rounded-3xl bg-slate-900/20">
                 <p class="text-slate-600 text-sm font-medium italic">Esperando datos ópticos...</p>
@@ -107,6 +113,7 @@ export class UIController {
         // Show action buttons
         this.nodes.copyAllBtn.classList.remove('hidden');
         this.nodes.exportCssBtn.classList.remove('hidden');
+        this.nodes.downloadMapBtn.classList.remove('hidden');
         
         colors.forEach((color, index) => {
             const card = document.createElement('div');
@@ -170,6 +177,40 @@ export class UIController {
             this.nodes.exportCssBtn.textContent = originalBtnText;
             this.nodes.exportCssBtn.classList.remove('bg-emerald-500/10', 'text-emerald-400');
         }, 2000);
+    }
+
+    exportSpectralMap() {
+        const width = 1000;
+        const height = 200;
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = width;
+        canvas.height = height;
+
+        const swatchWidth = width / this.currentPalette.length;
+
+        this.currentPalette.forEach((color, i) => {
+            // Draw background rectangle
+            ctx.fillStyle = color.hex;
+            ctx.fillRect(i * swatchWidth, 0, swatchWidth, height);
+
+            // Draw HEX code text
+            // Determine text color based on brightness
+            const brightness = (color.r * 299 + color.g * 587 + color.b * 114) / 1000;
+            ctx.fillStyle = brightness > 125 ? '#000000' : '#FFFFFF';
+            
+            ctx.font = 'bold 24px "JetBrains Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(color.hex.toUpperCase(), i * swatchWidth + swatchWidth / 2, height / 2);
+        });
+
+        // Trigger Download
+        const link = document.createElement('a');
+        link.download = `spectral-palette-${new Date().getTime()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
     }
 
     // Simple event emitter pattern
