@@ -11,22 +11,22 @@
 </head>
 <body class="bg-[#07090e] text-slate-300 min-h-screen flex flex-col items-center p-6 md:p-12 selection:bg-blue-500/30">
 
-    <header class="mb-20 text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 mb-8 shadow-2xl shadow-blue-500/20 border border-white/10">
-            <span class="text-white font-black text-3xl">S</span>
+    <header class="mb-12 md:mb-20 text-center px-4">
+        <div class="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 mb-6 md:mb-8 shadow-2xl shadow-blue-500/20 border border-white/10">
+            <span class="text-white font-black text-2xl md:text-3xl">S</span>
         </div>
-        <h1 class="text-6xl font-black tracking-[0.25em] text-white mb-4">SPECTRAL</h1>
-        <div class="flex items-center justify-center gap-6">
-            <span class="h-[1px] w-16 bg-slate-800/50"></span>
-            <p class="text-slate-500 uppercase text-[11px] tracking-[0.6em] font-extrabold">Professional Color Extraction</p>
-            <span class="h-[1px] w-16 bg-slate-800/50"></span>
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-black tracking-[0.15em] md:tracking-[0.25em] text-white mb-4">SPECTRAL</h1>
+        <div class="flex items-center justify-center gap-4 md:gap-6">
+            <span class="hidden sm:block h-[1px] w-12 md:w-16 bg-slate-800/50"></span>
+            <p class="text-slate-500 uppercase text-[9px] md:text-[11px] tracking-[0.4em] md:tracking-[0.6em] font-extrabold">Professional Color Extraction</p>
+            <span class="hidden sm:block h-[1px] w-12 md:w-16 bg-slate-800/50"></span>
         </div>
     </header>
 
     <main class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         <!-- left: Workspace -->
         <section class="lg:col-span-7 space-y-10">
-            <div id="drop-zone" class="group relative border-2 border-dashed border-slate-800/50 rounded-[3rem] p-24 flex flex-col items-center justify-center transition-all hover:border-blue-500/30 hover:bg-blue-500/[0.03] cursor-pointer overflow-hidden backdrop-blur-sm">
+            <div id="drop-zone" class="group relative border-2 border-dashed border-slate-800/50 rounded-[3rem] p-12 md:p-24 flex flex-col items-center justify-center transition-all hover:border-blue-500/30 hover:bg-blue-500/[0.03] cursor-pointer overflow-hidden backdrop-blur-sm">
                 <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="text-6xl mb-8 filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3">🎨</div>
                 <p class="text-slate-400 font-semibold tracking-tight text-xl text-center">
